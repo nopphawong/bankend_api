@@ -5,10 +5,19 @@ const app = express()
 const cors = require('cors')
 const corsOptions = require('./src/config/corsOptons')
 const mongoose = require('mongoose')
+const connectDB = require('./src/config/dbConn')
+
+connectDB()
 
 app.use(express.json())
 app.use(cors(corsOptions))
 
-console.log(process.env.PORT)
+/* MONGOOSE SETUP */
+const port = process.env.PORT || 5001
 
-app.listen(3300, () => console.log('Server is runing with port 3300'))
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB')
+  app.listen(port, () => console.log(`Server is runing with port ${port}`))
+})
+
+mongoose.connection.on('error', (err) => console.log(err))
