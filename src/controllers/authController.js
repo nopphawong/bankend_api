@@ -46,3 +46,8 @@ const login = async (req, res) => {
  * @route POST /auth/logout
  * @access public
  */
+const logout = (req, res) => {
+    res.json({ success: true, message: 'Logout Succeed'})
+}
+
+module.exports = { login, logout }
