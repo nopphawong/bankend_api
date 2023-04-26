@@ -18,6 +18,7 @@ app.use(cookieParser())
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/api/auth', require('./src/routes/authRoutes'))
+app.use('/api/users', require('./src/routes/userRoutes'))
 
 /* MONGOOSE SETUP */
 const port = process.env.PORT || 5001
