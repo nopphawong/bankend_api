@@ -15,12 +15,13 @@ const login = async (req, res) => {
       .status(400)
       .json({ success: false, message: 'All fields are required' })
   }
-
+  console.log(req.body)
   const userFound = await User.findOne({ username }).exec()
 
   if (!userFound || !userFound.active)
     return res.status(401).json({ success: false, message: 'Unauthorized' })
 
+  
   const match = await bcrypt.compare(password, userFound.password)
 
   if (!match)
@@ -47,7 +48,7 @@ const login = async (req, res) => {
  * @access public
  */
 const logout = (req, res) => {
-    res.json({ success: true, message: 'Logout Succeed'})
+  res.json({ success: true, message: 'Logout Succeed' })
 }
 
 module.exports = { login, logout }

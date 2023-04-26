@@ -29,6 +29,7 @@ const getUserID = async () => {
  */
 const createNewUser = async (req, res) => {
   try {
+    console.log(req.body);
     const { username, password, name, role } = req.body
 
     if (!username || !password || !name) {
@@ -57,7 +58,7 @@ const createNewUser = async (req, res) => {
       role,
     }
 
-    // const user = await User.create(userObject)
+    const user = await User.create(userObject)
 
     if (!user)
       return res
