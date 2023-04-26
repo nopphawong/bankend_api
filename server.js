@@ -5,7 +5,7 @@ const app = express()
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const corsOptions = require('./src/config/corsOptons')
+const corsOptions = require('./src/config/corsOptions')
 const mongoose = require('mongoose')
 const connectDB = require('./src/config/dbConn')
 

@@ -57,7 +57,7 @@ const createNewUser = async (req, res) => {
       role,
     }
 
-    const user = await User.create(userObject)
+    // const user = await User.create(userObject)
 
     if (!user)
       return res
