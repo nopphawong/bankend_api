@@ -18,14 +18,24 @@ const login = async (req, res) => {
 
   const userFound = await User.findOne({ username }).exec()
 
-  if (!userFound || !userFound.active) {
+  if (!userFound || !userFound.active)
     return res.status(401).json({ success: false, message: 'Unauthorized' })
-  }
 
   const match = await bcrypt.compare(password, userFound.password)
 
   if (!match)
     return res.status(401).json({ success: false, message: 'Unauthorized' })
+
+  const acessToken = jwt.sign({
+    UserInfo: {
+      username: userFound.username,
+      name: userFound.name,
+      role: userFound.role,
+    },
+  },
+  process.env.ACCESS_TOKEN_SECRET,
+  { expiresIn: '1d'}
+  )
 }
 
 /**
