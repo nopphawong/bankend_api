@@ -2,6 +2,8 @@ require('dotenv').config()
 require('express-async-errors')
 const express = require('express')
 const app = express()
+const path = require('path')
+const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const corsOptions = require('./src/config/corsOptons')
 const mongoose = require('mongoose')
@@ -11,6 +13,9 @@ connectDB()
 
 app.use(express.json())
 app.use(cors(corsOptions))
+app.use(cookieParser())
+
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 /* MONGOOSE SETUP */
 const port = process.env.PORT || 5001
